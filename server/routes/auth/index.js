@@ -82,17 +82,9 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.delete("/logout", (req, res, next) => {
-  //Creates a new token for the current user and sets the expiration to zero.
-  //That will invalidate the users current cookie after they log out.
-  const user = req.user;
-  const token = jwt.sign(
-    { id: user.dataValues.id },
-    process.env.SESSION_SECRET,
-    { expiresIn: 0 }
-  );
 
-
-  res.cookie('token', token, { httpOnly: true });
+  //Clears the users cookie token when they logout
+  res.clearCookie('token');
 
   res.sendStatus(204);
 });
