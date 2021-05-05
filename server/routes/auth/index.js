@@ -27,12 +27,13 @@ router.post("/register", async (req, res, next) => {
       { expiresIn: 86400 }
     );
 
+    //Creates and sends the token as an httpOnly cookie
     res.cookie('token', token, { httpOnly: true });
 
     res.json({
       ...user.dataValues,
-      token,
     });
+
   } catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
       return res.status(401).json({ error: "User already exists" });
@@ -67,9 +68,12 @@ router.post("/login", async (req, res, next) => {
         process.env.SESSION_SECRET,
         { expiresIn: 86400 }
       );
+
+      //Creates and sends the token as an httpOnly cookie
+      res.cookie('token', token, { httpOnly: true });
+
       res.json({
         ...user.dataValues,
-        token,
       });
     }
   } catch (error) {
@@ -78,6 +82,18 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.delete("/logout", (req, res, next) => {
+  //Creates a new token for the current user and sets the expiration to zero.
+  //That will invalidate the users current cookie after they log out.
+  const user = req.user;
+  const token = jwt.sign(
+    { id: user.dataValues.id },
+    process.env.SESSION_SECRET,
+    { expiresIn: 0 }
+  );
+
+
+  res.cookie('token', token, { httpOnly: true });
+
   res.sendStatus(204);
 });
 
