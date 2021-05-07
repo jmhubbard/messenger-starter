@@ -77,7 +77,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchConversations: () => {
-      console.log("DOES THIS WORK");
       dispatch(fetchConversations());
     },
     postMessage: (message) => {
