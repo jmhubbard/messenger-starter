@@ -95,8 +95,7 @@ export const postMessage = (body) => async (dispatch) => {
     const { data } = await axios.post("/api/messages", body);
 
 
-    /// wasn't chekcing for null but checking for undefined when we are passing in null
-    if (body.conversationId === null) {
+    if (!body.conversationId) {
       dispatch(addConversation(body.recipientId, data.message));
     } else {
       dispatch(setNewMessage(data.message));
