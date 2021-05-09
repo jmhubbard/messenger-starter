@@ -10,6 +10,8 @@ import {
   TextField,
   CssBaseline,
   Paper,
+  InputAdornment,
+  Link,
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
 import { makeStyles } from "@material-ui/core/styles";
@@ -44,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
   registerButton: {
     boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
-  }
+  },
 }));
 
 const Login = (props) => {
@@ -68,7 +70,15 @@ const Login = (props) => {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={5} className={classes.image} justify="center" alginItems="center">
+      <Grid
+        item
+        xs={false}
+        sm={4}
+        md={5}
+        className={classes.image}
+        justify="center"
+        alginItems="center"
+      >
         <h2>Converse with anyone with any language</h2>
       </Grid>
       <Grid item xs={12} sm={8} md={7} component={Paper} elevation={6} square>
@@ -78,7 +88,7 @@ const Login = (props) => {
           </Grid>
           <Grid item xs={4} sm={4} md={4}>
             <Button
-            className={classes.registerButton}
+              className={classes.registerButton}
               onClick={() => history.push("/register")}
               type="submit"
               size="large"
@@ -90,7 +100,7 @@ const Login = (props) => {
         </Grid>
         <Grid container direction="row" justify="center" alignItems="center">
           <Grid item xs={12} sm={8} md={8}>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} onSubmit={handleLogin}>
               <Grid>
                 <h1>Welcome back!</h1>
               </Grid>
@@ -116,6 +126,17 @@ const Login = (props) => {
                     required
                     fullWidth
                     margin="normal"
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <Typography>
+                            <Link href="#">
+                              Forgot?
+                            </Link>
+                          </Typography>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
               </Grid>
