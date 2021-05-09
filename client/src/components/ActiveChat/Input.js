@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FormControl, FilledInput } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { postMessage, fetchConversations } from "../../store/utils/thunkCreators";
+import { postMessage } from "../../store/utils/thunkCreators";
 
 const styles = {
   root: {
@@ -42,7 +42,7 @@ class Input extends Component {
       sender: this.props.user,
     };
     await this.props.postMessage(reqBody);
-    this.props.fetchConversations();
+    // this.props.fetchConversations();
     this.setState({
       text: "",
     });
@@ -76,9 +76,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchConversations: () => {
-      dispatch(fetchConversations());
-    },
     postMessage: (message) => {
       dispatch(postMessage(message));
     },
