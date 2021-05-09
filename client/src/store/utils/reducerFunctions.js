@@ -1,5 +1,5 @@
 export const addMessageToStore = (state, payload) => {
-  const { message, sender } = payload;
+  const { message } = payload;
 
   return state.map((convo) => {
     if (convo.id === message.conversationId) {
