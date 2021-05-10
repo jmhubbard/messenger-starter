@@ -19,6 +19,9 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
+    fontFamily: "OpenSans",
+    fontWeight: "600",
+    fontStyle: "normal",
   },
   image: {
     backgroundImage: `linear-gradient(to bottom, RGBA(58, 141, 255, .85), RGBA(134, 185, 255, .85)),url('${process.env.PUBLIC_URL}/bg-img.png')`,
@@ -33,10 +36,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -46,6 +45,10 @@ const useStyles = makeStyles((theme) => ({
   },
   registerButton: {
     boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+    color: "#3A8DFF",
+  },
+  loginButton: {
+    backgroundColor: "#3A8DFF",
   },
 }));
 
@@ -71,15 +74,17 @@ const Login = (props) => {
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid
-        item
+        container
         xs={false}
         sm={4}
         md={5}
         className={classes.image}
         justify="center"
-        alginItems="center"
+        alignItems="center"
       >
-        <h2>Converse with anyone with any language</h2>
+        <Grid item xs={4} sm={6} md={6}>
+          <h1>Converse with anyone with any language</h1>
+        </Grid>
       </Grid>
       <Grid item xs={12} sm={8} md={7} component={Paper} elevation={6} square>
         <Grid container direction="row" justify="flex-end" spacing={0}>
@@ -130,9 +135,7 @@ const Login = (props) => {
                       endAdornment: (
                         <InputAdornment position="end">
                           <Typography>
-                            <Link href="#">
-                              Forgot?
-                            </Link>
+                            <Link href="#">Forgot?</Link>
                           </Typography>
                         </InputAdornment>
                       ),
@@ -148,6 +151,7 @@ const Login = (props) => {
                     size="large"
                     color="primary"
                     fullWidth
+                    className={classes.loginButton}
                   >
                     Login
                   </Button>
