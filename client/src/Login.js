@@ -52,6 +52,11 @@ const useStyles = makeStyles((theme) => ({
 
   ButtonGrid: {
     margin: "30px",
+  },
+  formHeader: {
+    fontWeight: "600",
+    fontStyle: "normal",
+
   }
 }));
 
@@ -84,14 +89,14 @@ const Login = (props) => {
           justify="center"
           align="center"
         >
-          <Grid item xs={4} sm={6} md={6}>
+          <Grid item xs={9} sm={9} md={9}>
             <Icon>
               <img
                 src={`${process.env.PUBLIC_URL}/bubble.svg`}
                 alt="Chat Bubble"
               />
             </Icon>
-            <h1>Converse with anyone with any language</h1>
+            <Typography variant="h4">Converse with anyone with any language</Typography>
           </Grid>
         </Grid>
       </Grid>
@@ -104,7 +109,7 @@ const Login = (props) => {
           spacing={0}
           className={classes.topRow}
         >
-          <Grid item xs={4} sm={4} md={4}>
+          <Grid item xs={3} sm={3} md={3}>
             <Typography>Don't have an account?</Typography>
           </Grid>
           <Grid item xs={4} sm={4} md={4}>
@@ -135,7 +140,7 @@ const Login = (props) => {
                 sm={8}
                 md={8}
               >
-                <h1>Welcome back!</h1>
+                <Typography variant="h5" className={classes.formHeader}>Welcome back!</Typography>
                 <form className={classes.form} onSubmit={handleLogin}>
                   <Grid container justify="center">
                     <Grid item xs={12} sm={12} md={12}>
