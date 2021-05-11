@@ -5,10 +5,6 @@ import moment from "moment";
 
 const Messages = (props) => {
   const { messages, otherUser, userId } = props;
-  // Sorts all the messages in ascending order so that they are displayed in the correct order.
-  messages.sort((a,b) => {
-    return a.id - b.id;
-  });
 
   return (
     <Box>
