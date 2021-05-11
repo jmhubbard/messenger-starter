@@ -3,10 +3,8 @@ import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Grid,
-  Box,
   Typography,
   Button,
-  FormControl,
   TextField,
   CssBaseline,
   InputAdornment,
@@ -47,19 +45,14 @@ const useStyles = makeStyles((theme) => ({
   topRow: {
     margin: "25px",
   },
-  // test: {
-  //   background: "blue",
-  // },
-  // formBack: {
-  //   background: "yellow",
-  // },
-  parentForm: {
-    background: "red",
-  },
   pictureText: {
     height: "100vh",
     color: "white",
   },
+
+  ButtonGrid: {
+    margin: "30px",
+  }
 }));
 
 const Login = (props) => {
@@ -93,7 +86,10 @@ const Login = (props) => {
         >
           <Grid item xs={4} sm={6} md={6}>
             <Icon>
-              <img src={`${process.env.PUBLIC_URL}/bubble.svg`} alt="Chat Bubble"/>
+              <img
+                src={`${process.env.PUBLIC_URL}/bubble.svg`}
+                alt="Chat Bubble"
+              />
             </Icon>
             <h1>Converse with anyone with any language</h1>
           </Grid>
@@ -131,65 +127,67 @@ const Login = (props) => {
           alignItems="center"
           className={classes.formBack}
         >
-          <Grid item xs={12} sm={12} md={12} className={classes.parentForm}>
+          <Grid item xs={12} sm={12} md={12}>
             <Grid container justify="center">
-              <Grid item>
+              <Grid
+                item
+                xs={8}
+                sm={8}
+                md={8}
+              >
                 <h1>Welcome back!</h1>
-              </Grid>
+                <form className={classes.form} onSubmit={handleLogin}>
+                  <Grid container justify="center">
+                    <Grid item xs={12} sm={12} md={12}>
+                      <TextField
+                        label="E-mail address"
+                        name="username"
+                        type="text"
+                        required
+                        autoFocus
+                        fullWidth
+                        margin="normal"
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid container justify="center">
+                    <Grid item xs={12} sm={12} md={12}>
+                      <TextField
+                        label="Password"
+                        type="password"
+                        name="password"
+                        required
+                        fullWidth
+                        margin="normal"
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <Typography>
+                                <Link href="#">Forgot?</Link>
+                              </Typography>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid container justify="center" className={classes.ButtonGrid}>
+                    <Grid item xs={4} sm={4} md={4}>
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        size="large"
+                        color="primary"
+                        fullWidth
+                        className={classes.loginButton}
 
-              <form className={classes.form} onSubmit={handleLogin}>
-                <Grid>
-                  <h1>Welcome back!</h1>
-                </Grid>
-                <Grid container justify="center">
-                  <Grid item xs={12} sm={8} md={8}>
-                    <TextField
-                      label="E-mail address"
-                      name="username"
-                      type="text"
-                      required
-                      autoFocus
-                      fullWidth
-                      margin="normal"
-                    />
+                      >
+                        Login
+                      </Button>
+                    </Grid>
                   </Grid>
-                </Grid>
-                <Grid container justify="center">
-                  <Grid item xs={12} sm={8} md={8}>
-                    <TextField
-                      label="Password"
-                      type="password"
-                      name="password"
-                      required
-                      fullWidth
-                      margin="normal"
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Typography>
-                              <Link href="#">Forgot?</Link>
-                            </Typography>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
-                </Grid>
-                <Grid container justify="center">
-                  <Grid item xs={4} sm={4} md={4}>
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      size="large"
-                      color="primary"
-                      fullWidth
-                      className={classes.loginButton}
-                    >
-                      Login
-                    </Button>
-                  </Grid>
-                </Grid>
-              </form>
+                </form>
+              </Grid>
             </Grid>
             {/* <form className={classes.form} onSubmit={handleLogin}>
               <Grid>
