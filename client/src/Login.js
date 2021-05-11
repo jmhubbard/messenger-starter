@@ -9,9 +9,9 @@ import {
   FormControl,
   TextField,
   CssBaseline,
-  Paper,
   InputAdornment,
   Link,
+  Icon,
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
 import { makeStyles } from "@material-ui/core/styles";
@@ -30,12 +30,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "cover",
     backgroundPosition: "center",
   },
-  paper: {
-    margin: theme.spacing(8, 4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -49,6 +43,22 @@ const useStyles = makeStyles((theme) => ({
   },
   loginButton: {
     backgroundColor: "#3A8DFF",
+  },
+  topRow: {
+    margin: "25px",
+  },
+  // test: {
+  //   background: "blue",
+  // },
+  // formBack: {
+  //   background: "yellow",
+  // },
+  parentForm: {
+    background: "red",
+  },
+  pictureText: {
+    height: "100vh",
+    color: "white",
   },
 }));
 
@@ -73,21 +83,31 @@ const Login = (props) => {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid
-        container
-        xs={false}
-        sm={4}
-        md={5}
-        className={classes.image}
-        justify="center"
-        alignItems="center"
-      >
-        <Grid item xs={4} sm={6} md={6}>
-          <h1>Converse with anyone with any language</h1>
+      <Grid item xs={12} sm={4} md={5} className={classes.image}>
+        <Grid
+          container
+          className={classes.pictureText}
+          alignItems="center"
+          justify="center"
+          align="center"
+        >
+          <Grid item xs={4} sm={6} md={6}>
+            <Icon>
+              <img src={`${process.env.PUBLIC_URL}/bubble.svg`} alt="Chat Bubble"/>
+            </Icon>
+            <h1>Converse with anyone with any language</h1>
+          </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12} sm={8} md={7} component={Paper} elevation={6} square>
-        <Grid container direction="row" justify="flex-end" spacing={0}>
+      <Grid item xs={12} sm={8} md={7} className={classes.test}>
+        <Grid
+          container
+          direction="row"
+          justify="flex-end"
+          alignItems="center"
+          spacing={0}
+          className={classes.topRow}
+        >
           <Grid item xs={4} sm={4} md={4}>
             <Typography>Don't have an account?</Typography>
           </Grid>
@@ -98,18 +118,84 @@ const Login = (props) => {
               type="submit"
               size="large"
               color="primary"
+              fullwidth
             >
               Create account
             </Button>
           </Grid>
         </Grid>
-        <Grid container direction="row" justify="center" alignItems="center">
-          <Grid item xs={12} sm={8} md={8}>
-            <form className={classes.form} onSubmit={handleLogin}>
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          className={classes.formBack}
+        >
+          <Grid item xs={12} sm={12} md={12} className={classes.parentForm}>
+            <Grid container justify="center">
+              <Grid item>
+                <h1>Welcome back!</h1>
+              </Grid>
+
+              <form className={classes.form} onSubmit={handleLogin}>
+                <Grid>
+                  <h1>Welcome back!</h1>
+                </Grid>
+                <Grid container justify="center">
+                  <Grid item xs={12} sm={8} md={8}>
+                    <TextField
+                      label="E-mail address"
+                      name="username"
+                      type="text"
+                      required
+                      autoFocus
+                      fullWidth
+                      margin="normal"
+                    />
+                  </Grid>
+                </Grid>
+                <Grid container justify="center">
+                  <Grid item xs={12} sm={8} md={8}>
+                    <TextField
+                      label="Password"
+                      type="password"
+                      name="password"
+                      required
+                      fullWidth
+                      margin="normal"
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Typography>
+                              <Link href="#">Forgot?</Link>
+                            </Typography>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Grid>
+                </Grid>
+                <Grid container justify="center">
+                  <Grid item xs={4} sm={4} md={4}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      size="large"
+                      color="primary"
+                      fullWidth
+                      className={classes.loginButton}
+                    >
+                      Login
+                    </Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </Grid>
+            {/* <form className={classes.form} onSubmit={handleLogin}>
               <Grid>
                 <h1>Welcome back!</h1>
               </Grid>
-              <Grid>
+              <Grid container justify="center">
                 <Grid item xs={12} sm={8} md={8}>
                   <TextField
                     label="E-mail address"
@@ -122,7 +208,7 @@ const Login = (props) => {
                   />
                 </Grid>
               </Grid>
-              <Grid>
+              <Grid container justify="center">
                 <Grid item xs={12} sm={8} md={8}>
                   <TextField
                     label="Password"
@@ -143,7 +229,7 @@ const Login = (props) => {
                   />
                 </Grid>
               </Grid>
-              <Grid>
+              <Grid container justify="center">
                 <Grid item xs={4} sm={4} md={4}>
                   <Button
                     type="submit"
@@ -157,57 +243,11 @@ const Login = (props) => {
                   </Button>
                 </Grid>
               </Grid>
-              {/* <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign In
-            </Button> */}
-            </form>
+            </form> */}
           </Grid>
         </Grid>
       </Grid>
     </Grid>
-
-    // <Grid container className={classes.root}>
-    //   <CssBaseline />
-    //     <Grid item xs={false} sm={4} md={7} className={classes.image} />
-    //     <h1>Hellow</h1>
-    //     <Grid item>
-    // <Typography>Need to register?</Typography>
-    // <Button onClick={() => history.push("/register")}>Register</Button>
-    //     </Grid>
-    //     <form onSubmit={handleLogin}>
-    //       <Grid>
-    //         <Grid>
-    //           <FormControl margin="normal" required>
-    // <TextField
-    //   aria-label="username"
-    //   label="Username"
-    //   name="username"
-    //   type="text"
-    // />
-    //           </FormControl>
-    //         </Grid>
-    //         <FormControl margin="normal" required>
-    // <TextField
-    //   label="password"
-    //   aria-label="password"
-    //   type="password"
-    //   name="password"
-    // />
-    //         </FormControl>
-    // <Grid>
-    //   <Button type="submit" variant="contained" size="large">
-    //     Login
-    //   </Button>
-    // </Grid>
-    //       </Grid>
-    //     </form>
-    // </Grid>
   );
 };
 
