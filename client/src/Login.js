@@ -14,6 +14,9 @@ import {
 import { login } from "./store/utils/thunkCreators";
 import { makeStyles } from "@material-ui/core/styles";
 
+import sidebarPicture from './assets/bg-img.png';
+import chatBubbleIcon from './assets/bubble.svg';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
@@ -22,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
     fontStyle: "normal",
   },
   image: {
-    backgroundImage: `linear-gradient(to bottom, RGBA(58, 141, 255, .85), RGBA(134, 185, 255, .85)),url('${process.env.PUBLIC_URL}/bg-img.png')`,
+    backgroundImage: `linear-gradient(to bottom, RGBA(58, 141, 255, .85), RGBA(134, 185, 255, .85)),url('${sidebarPicture}')`,
+
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -96,7 +100,7 @@ const Login = (props) => {
           <Grid item xs={9} sm={9} md={9}>
             <Icon>
               <img
-                src={`${process.env.PUBLIC_URL}/bubble.svg`}
+                src={chatBubbleIcon}
                 alt="Chat Bubble"
               />
             </Icon>
