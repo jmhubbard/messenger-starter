@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     backgroundImage: `linear-gradient(to bottom, RGBA(58, 141, 255, .85), RGBA(134, 185, 255, .85)),url('${process.env.PUBLIC_URL}/bg-img.png')`,
-    // backgroundImage: "url(https://source.unsplash.com/random)",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -59,6 +58,9 @@ const useStyles = makeStyles((theme) => ({
   },
   formGrid: {
     margin: "50px 0",
+  },
+  registerButtonGrid: {
+    margin: "0 50px 0 0",
   }
 }));
 
@@ -114,14 +116,14 @@ const Login = (props) => {
           <Grid item xs={3} sm={3} md={3}>
             <Typography>Don't have an account?</Typography>
           </Grid>
-          <Grid item xs={4} sm={4} md={4}>
+          <Grid item xs={3} sm={3} md={3} className={classes.registerButtonGrid}>
             <Button
               className={classes.registerButton}
               onClick={() => history.push("/register")}
               type="submit"
               size="large"
               color="primary"
-              fullwidth
+              fullWidth
             >
               Create account
             </Button>
@@ -196,59 +198,6 @@ const Login = (props) => {
                 </form>
               </Grid>
             </Grid>
-            {/* <form className={classes.form} onSubmit={handleLogin}>
-              <Grid>
-                <h1>Welcome back!</h1>
-              </Grid>
-              <Grid container justify="center">
-                <Grid item xs={12} sm={8} md={8}>
-                  <TextField
-                    label="E-mail address"
-                    name="username"
-                    type="text"
-                    required
-                    autoFocus
-                    fullWidth
-                    margin="normal"
-                  />
-                </Grid>
-              </Grid>
-              <Grid container justify="center">
-                <Grid item xs={12} sm={8} md={8}>
-                  <TextField
-                    label="Password"
-                    type="password"
-                    name="password"
-                    required
-                    fullWidth
-                    margin="normal"
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Typography>
-                            <Link href="#">Forgot?</Link>
-                          </Typography>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Grid>
-              </Grid>
-              <Grid container justify="center">
-                <Grid item xs={4} sm={4} md={4}>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    size="large"
-                    color="primary"
-                    fullWidth
-                    className={classes.loginButton}
-                  >
-                    Login
-                  </Button>
-                </Grid>
-              </Grid>
-            </form> */}
           </Grid>
         </Grid>
       </Grid>
