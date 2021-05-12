@@ -56,7 +56,9 @@ const useStyles = makeStyles((theme) => ({
   formHeader: {
     fontWeight: "600",
     fontStyle: "normal",
-
+  },
+  formGrid: {
+    margin: "50px 0",
   }
 }));
 
@@ -133,7 +135,7 @@ const Login = (props) => {
           className={classes.formBack}
         >
           <Grid item xs={12} sm={12} md={12}>
-            <Grid container justify="center">
+            <Grid container justify="center" alignItems="center" className={classes.formGrid}>
               <Grid
                 item
                 xs={8}
