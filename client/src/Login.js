@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   buttonGrid: {
-    margin: "30px",
+    margin: "30px 0 0 0",
   },
   formHeader: {
     fontWeight: "600",
