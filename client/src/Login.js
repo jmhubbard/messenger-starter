@@ -13,7 +13,7 @@ import {
 import { login } from "./store/utils/thunkCreators";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Header from "./components/Header/Header";
+import Header from "./components/MainPageHeader/MainPageHeader";
 import MainPageSidebar from "./components/MainPageSidebar/MainPageSidebar";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#3A8DFF",
   },
 
-  ButtonGrid: {
+  buttonGrid: {
     margin: "30px",
   },
   formHeader: {
@@ -66,7 +66,7 @@ const Login = (props) => {
       <Grid item xs={12} sm={4} md={5}>
         <MainPageSidebar />
       </Grid>
-      <Grid item xs={12} sm={8} md={7} className={classes.test}>
+      <Grid item xs={12} sm={8} md={7}>
         <Header
           message="Don't have an account?"
           buttonPush="/register"
@@ -128,7 +128,7 @@ const Login = (props) => {
                   <Grid
                     container
                     justify="center"
-                    className={classes.ButtonGrid}
+                    className={classes.buttonGrid}
                   >
                     <Grid item xs={4}>
                       <Button
