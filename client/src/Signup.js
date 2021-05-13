@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   loginButton: {
     backgroundColor: "#3A8DFF",
+    height: "60px"
   },
   topRow: {
     margin: "25px",

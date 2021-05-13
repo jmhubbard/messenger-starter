@@ -12,6 +12,8 @@ const useStyles = makeStyles((theme) => ({
   registerButton: {
     boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
     color: "#3A8DFF",
+    height: "60px"
+
   },
   topRow: {
     margin: "25px",
