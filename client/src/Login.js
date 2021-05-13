@@ -9,6 +9,7 @@ import {
   CssBaseline,
   InputAdornment,
   Link,
+  Hidden
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
 import { makeStyles } from "@material-ui/core/styles";
@@ -64,9 +65,11 @@ const Login = (props) => {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={12} sm={4} md={5}>
+      <Hidden xsDown>
+      <Grid item xs={false} sm={4} md={5}>
         <MainPageSidebar />
       </Grid>
+      </Hidden>
       <Grid item xs={12} sm={8} md={7}>
         <Header
           message="Don't have an account?"
