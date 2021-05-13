@@ -38,10 +38,10 @@ const Header = (props) => {
       spacing={0}
       className={classes.topRow}
     >
-      <Grid item xs={4}>
+      <Grid item xs={5} sm={4}>
         <Typography>{message}</Typography>
       </Grid>
-      <Grid item xs={3} className={classes.registerButtonGrid}>
+      <Grid item xs={4} md={3} className={classes.registerButtonGrid}>
         <Button
           className={classes.registerButton}
           onClick={() => history.push(`${buttonPush}`)}
