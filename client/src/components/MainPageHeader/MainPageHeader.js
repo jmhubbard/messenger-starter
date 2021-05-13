@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = (props) => {
   const classes = useStyles();
-  const { message, buttonPush, buttonText } = props;
+  const { message, linkTo, buttonText } = props;
   const history = useHistory();
 
 
@@ -44,7 +44,7 @@ const Header = (props) => {
       <Grid item xs={4} md={3} className={classes.registerButtonGrid}>
         <Button
           className={classes.registerButton}
-          onClick={() => history.push(`${buttonPush}`)}
+          onClick={() => history.push(`${linkTo}`)}
           type="submit"
           size="large"
           color="primary"

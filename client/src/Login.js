@@ -73,7 +73,7 @@ const Login = (props) => {
       <Grid item xs={12} sm={8} md={7}>
         <Header
           message="Don't have an account?"
-          buttonPush="/register"
+          linkTo="/register"
           buttonText="Create account"
         />
         <Grid
