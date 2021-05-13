@@ -70,7 +70,7 @@ const Login = (props) => {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Hidden xsDown>
+      <Hidden smDown>
       <Grid item xs={false} sm={4} md={5}>
         <MainPageSidebar />
       </Grid>
