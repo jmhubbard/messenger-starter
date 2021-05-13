@@ -36,7 +36,7 @@ const Header = (props) => {
       spacing={0}
       className={classes.topRow}
     >
-      <Grid item xs={3}>
+      <Grid item xs={4}>
         <Typography>{message}</Typography>
       </Grid>
       <Grid item xs={3} className={classes.registerButtonGrid}>
