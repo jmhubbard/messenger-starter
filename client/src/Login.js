@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
 import { makeStyles } from "@material-ui/core/styles";
+import  Header  from "./components/Header/Header"
 
 import sidebarPicture from './assets/bg-img.png';
 import chatBubbleIcon from './assets/bubble.svg';
@@ -109,30 +110,11 @@ const Login = (props) => {
         </Grid>
       </Grid>
       <Grid item xs={12} sm={8} md={7} className={classes.test}>
-        <Grid
-          container
-          direction="row"
-          justify="flex-end"
-          alignItems="center"
-          spacing={0}
-          className={classes.topRow}
-        >
-          <Grid item xs={3} sm={3} md={3}>
-            <Typography>Don't have an account?</Typography>
-          </Grid>
-          <Grid item xs={3} sm={3} md={3} className={classes.registerButtonGrid}>
-            <Button
-              className={classes.registerButton}
-              onClick={() => history.push("/register")}
-              type="submit"
-              size="large"
-              color="primary"
-              fullWidth
-            >
-              Create account
-            </Button>
-          </Grid>
-        </Grid>
+        <Header 
+        message = "Don't have an account?"
+        buttonPush = "/register"
+        buttonText = "Create account"
+        />
         <Grid
           container
           direction="row"
