@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Grid,
@@ -9,14 +9,12 @@ import {
   CssBaseline,
   InputAdornment,
   Link,
-  Icon,
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
 import { makeStyles } from "@material-ui/core/styles";
-import  Header  from "./components/Header/Header"
 
-import sidebarPicture from './assets/bg-img.png';
-import chatBubbleIcon from './assets/bubble.svg';
+import Header from "./components/Header/Header";
+import MainPageSidebar from "./components/MainPageSidebar/MainPageSidebar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,33 +23,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "600",
     fontStyle: "normal",
   },
-  image: {
-    backgroundImage: `linear-gradient(to bottom, RGBA(58, 141, 255, .85), RGBA(134, 185, 255, .85)),url('${sidebarPicture}')`,
-
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  registerButton: {
-    boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
-    color: "#3A8DFF",
-  },
   loginButton: {
     backgroundColor: "#3A8DFF",
-  },
-  topRow: {
-    margin: "25px",
-  },
-  pictureText: {
-    height: "100vh",
-    color: "white",
   },
 
   ButtonGrid: {
@@ -64,15 +41,11 @@ const useStyles = makeStyles((theme) => ({
   formGrid: {
     margin: "50px 0",
   },
-  registerButtonGrid: {
-    margin: "0 50px 0 0",
-  }
 }));
 
 const Login = (props) => {
   const classes = useStyles();
 
-  const history = useHistory();
   const { user, login } = props;
 
   const handleLogin = async (event) => {
@@ -90,30 +63,14 @@ const Login = (props) => {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={12} sm={4} md={5} className={classes.image}>
-        <Grid
-          container
-          className={classes.pictureText}
-          alignItems="center"
-          justify="center"
-          align="center"
-        >
-          <Grid item xs={9} sm={9} md={9}>
-            <Icon>
-              <img
-                src={chatBubbleIcon}
-                alt="Chat Bubble"
-              />
-            </Icon>
-            <Typography variant="h4">Converse with anyone with any language</Typography>
-          </Grid>
-        </Grid>
+      <Grid item xs={12} sm={4} md={5}>
+        <MainPageSidebar />
       </Grid>
       <Grid item xs={12} sm={8} md={7} className={classes.test}>
-        <Header 
-        message = "Don't have an account?"
-        buttonPush = "/register"
-        buttonText = "Create account"
+        <Header
+          message="Don't have an account?"
+          buttonPush="/register"
+          buttonText="Create account"
         />
         <Grid
           container
@@ -122,18 +79,20 @@ const Login = (props) => {
           alignItems="center"
           className={classes.formBack}
         >
-          <Grid item xs={12} sm={12} md={12}>
-            <Grid container justify="center" alignItems="center" className={classes.formGrid}>
-              <Grid
-                item
-                xs={8}
-                sm={8}
-                md={8}
-              >
-                <Typography variant="h5" className={classes.formHeader}>Welcome back!</Typography>
+          <Grid item xs={12}>
+            <Grid
+              container
+              justify="center"
+              alignItems="center"
+              className={classes.formGrid}
+            >
+              <Grid item xs={8}>
+                <Typography variant="h5" className={classes.formHeader}>
+                  Welcome back!
+                </Typography>
                 <form className={classes.form} onSubmit={handleLogin}>
                   <Grid container justify="center">
-                    <Grid item xs={12} sm={12} md={12}>
+                    <Grid item xs={12}>
                       <TextField
                         label="E-mail address"
                         name="username"
@@ -146,7 +105,7 @@ const Login = (props) => {
                     </Grid>
                   </Grid>
                   <Grid container justify="center">
-                    <Grid item xs={12} sm={12} md={12}>
+                    <Grid item xs={12}>
                       <TextField
                         label="Password"
                         type="password"
@@ -166,8 +125,12 @@ const Login = (props) => {
                       />
                     </Grid>
                   </Grid>
-                  <Grid container justify="center" className={classes.ButtonGrid}>
-                    <Grid item xs={4} sm={4} md={4}>
+                  <Grid
+                    container
+                    justify="center"
+                    className={classes.ButtonGrid}
+                  >
+                    <Grid item xs={4}>
                       <Button
                         type="submit"
                         variant="contained"
@@ -175,7 +138,6 @@ const Login = (props) => {
                         color="primary"
                         fullWidth
                         className={classes.loginButton}
-
                       >
                         Login
                       </Button>
