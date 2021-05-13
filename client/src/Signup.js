@@ -26,26 +26,11 @@ const useStyles = makeStyles((theme) => ({
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  registerButton: {
-    boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
-    color: "#3A8DFF",
-  },
   loginButton: {
     backgroundColor: "#3A8DFF",
     height: "60px"
   },
-  topRow: {
-    margin: "25px",
-  },
-  pictureText: {
-    height: "100vh",
-    color: "white",
-  },
-
-  ButtonGrid: {
+  buttonGrid: {
     margin: "30px",
   },
   formHeader: {
@@ -54,9 +39,6 @@ const useStyles = makeStyles((theme) => ({
   },
   formGrid: {
     margin: "50px 0",
-  },
-  registerButtonGrid: {
-    margin: "0 50px 0 0",
   },
 }));
 
@@ -180,7 +162,7 @@ const Login = (props) => {
                   <Grid
                     container
                     justify="center"
-                    className={classes.ButtonGrid}
+                    className={classes.buttonGrid}
                   >
                     <Grid item xs={4}>
                       <Button
