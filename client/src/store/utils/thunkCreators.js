@@ -23,21 +23,20 @@ export const fetchUser = () => async (dispatch) => {
     const { data } = await axios.get("/auth/user");
     dispatch(gotUser(data));
     if (data.id) {
-      socket.emit("go-online", data.id);
+      dispatch(setFetchingStatus(false));
     }
   } catch (error) {
     console.error(error);
-  } finally {
-    dispatch(setFetchingStatus(false));
-  }
+  } 
 };
 
 export const register = (credentials) => async (dispatch) => {
   try {
     const { data } = await axios.post("/auth/register", credentials);
     dispatch(gotUser(data));
-    socket.connect()
-    socket.emit("go-online", data.id);
+    const userId = data.id;
+    socket.auth = { userId };
+    socket.connect();
   } catch (error) {
     console.error(error);
     dispatch(gotUser({ error: error.response.data.error || "Server Error" }));
@@ -48,8 +47,9 @@ export const login = (credentials) => async (dispatch) => {
   try {
     const { data } = await axios.post("/auth/login", credentials);
     dispatch(gotUser(data));
+    const userId = data.id;
+    socket.auth = { userId };
     socket.connect();
-    socket.emit("go-online", data.id);
   } catch (error) {
     console.error(error);
     dispatch(gotUser({ error: error.response.data.error || "Server Error" }));
@@ -60,7 +60,6 @@ export const logout = (id) => async (dispatch) => {
   try {
     await axios.delete("/auth/logout");
     dispatch(gotUser({}));
-    socket.emit("logout", id);
     socket.disconnect();
   } catch (error) {
     console.error(error);
