@@ -11,6 +11,9 @@ const { app, sessionStore } = require("../app");
 const http = require("http");
 const db = require("../db");
 const onlineUsersSockets = require("../onlineUsersSockets");
+const cookie = require('cookie');
+const jwt = require("jsonwebtoken");
+
 
 /**
  * Get port from environment and store in Express.
@@ -31,10 +34,22 @@ const server = http.createServer(app);
 
 const io = require("socket.io")(server);
 
+io.use(async (socket, next) => {
+  try {
+    const userCookie = cookie.parse(socket.handshake.headers.cookie);
+    const userToken = userCookie.token;
+    const payload = await jwt.verify(userToken, process.env.SESSION_SECRET);
+    socket.userId = payload.id;
+    next();
+  } catch(err) {
+    console.log(err);
+  }
+})
+
 io.on("connection", (socket) => {
   const id = socket.handshake.auth.userId;
   
-  if (!(id in onlineUsersSockets)) {
+  if (!(id in onlineUsersSockets) && socket.userId === id) {
     onlineUsersSockets[id] = socket.id;
   }
   // send the user who just went online to everyone else who is already online
