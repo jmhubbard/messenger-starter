@@ -11,8 +11,6 @@ const { app, sessionStore } = require("../app");
 const http = require("http");
 const db = require("../db");
 const onlineUsers = require("../onlineUsers");
-const crypto = require("crypto");
-const randomId = () => crypto.randomBytes(8).toString("hex");
 const onlineUsersSockets = require("../onlineUsersSockets");
 
 /**
