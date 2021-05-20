@@ -4,6 +4,7 @@ import { BadgeAvatar, ChatContent } from "../Sidebar";
 import { withStyles } from "@material-ui/core/styles";
 import { setActiveChat } from "../../store/activeConversation";
 import { connect } from "react-redux";
+import { resetNotifications } from "../../store/conversations";
 
 const styles = {
   root: {
@@ -22,6 +23,7 @@ const styles = {
 class Chat extends Component {
   handleClick = async (conversation) => {
     await this.props.setActiveChat(conversation.otherUser.username);
+    await this.props.resetNotifications(conversation.id);
   };
 
   render() {
@@ -49,6 +51,9 @@ const mapDispatchToProps = (dispatch) => {
     setActiveChat: (id) => {
       dispatch(setActiveChat(id));
     },
+    resetNotifications: (id) => {
+      dispatch(resetNotifications(id));
+    }
   };
 };
 
