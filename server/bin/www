@@ -10,7 +10,10 @@ require("dotenv").config();
 const { app, sessionStore } = require("../app");
 const http = require("http");
 const db = require("../db");
-const onlineUsers = require("../onlineUsers");
+const onlineUsersSockets = require("../onlineUsersSockets");
+const cookie = require('cookie');
+const jwt = require("jsonwebtoken");
+
 
 /**
  * Get port from environment and store in Express.
@@ -31,29 +34,43 @@ const server = http.createServer(app);
 
 const io = require("socket.io")(server);
 
+io.use(async (socket, next) => {
+  try {
+    const userCookie = cookie.parse(socket.handshake.headers.cookie);
+    const userToken = userCookie.token;
+    const payload = await jwt.verify(userToken, process.env.SESSION_SECRET);
+    socket.userId = payload.id;
+    next();
+  } catch(error) {
+    next(error);
+  }
+})
+
 io.on("connection", (socket) => {
-  socket.on("go-online", (id) => {
-    if (!onlineUsers.includes(id)) {
-      onlineUsers.push(id);
-    }
-    // send the user who just went online to everyone else who is already online
-    socket.broadcast.emit("add-online-user", id);
-  });
+  const id = socket.handshake.auth.userId;
+  
+  if (!(id in onlineUsersSockets) && socket.userId === id) {
+    onlineUsersSockets[id] = socket.id;
+  }
+  // send the user who just went online to everyone else who is already online
+  socket.broadcast.emit("add-online-user", id);
+
 
   socket.on("new-message", (data) => {
-    socket.broadcast.emit("new-message", {
+    socket.to(onlineUsersSockets[data.recipientId]).emit("new-message", {
       message: data.message,
-      sender: data.sender,
+      from: data.sender,
     });
   });
 
-  socket.on("logout", (id) => {
-    if (onlineUsers.includes(id)) {
-      userIndex = onlineUsers.indexOf(id);
-      onlineUsers.splice(userIndex, 1);
+  socket.on("disconnect", () => {
+    if (id in onlineUsersSockets) {
+      delete onlineUsersSockets[id];
       socket.broadcast.emit("remove-offline-user", id);
     }
   });
+
+  
 });
 
 sessionStore
