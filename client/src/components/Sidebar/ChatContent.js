@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +51,9 @@ const ChatContent = (props) => {
           {latestMessageText}
         </Typography>
       </Box>
+      <Typography className={classes.notification}>
+          {conversation.messageCount}
+      </Typography>
     </Box>
   );
 };
