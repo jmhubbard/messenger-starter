@@ -41,8 +41,8 @@ io.use(async (socket, next) => {
     const payload = await jwt.verify(userToken, process.env.SESSION_SECRET);
     socket.userId = payload.id;
     next();
-  } catch(err) {
-    console.log(err);
+  } catch(error) {
+    next(error);
   }
 })
 
