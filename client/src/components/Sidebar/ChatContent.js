@@ -50,9 +50,11 @@ const ChatContent = (props) => {
           {latestMessageText}
         </Typography>
       </Box>
-      <Typography className={classes.notification}>
+      {conversation.messageCount > 0 && (
+        <Typography className={classes.notification}>
           {conversation.messageCount}
-      </Typography>
+        </Typography>
+      )}
     </Box>
   );
 };
