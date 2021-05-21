@@ -1,9 +1,10 @@
 import io from "socket.io-client";
 import store from "./store";
 import {
-  setNewMessage,
+  // setNewMessage,
   removeOfflineUser,
   addOnlineUser,
+  setNewMessageReceiver
 } from "./store/conversations";
 
 const socket = io(window.location.origin, { autoConnect: false });
@@ -20,7 +21,9 @@ socket.on("connect", () => {
     store.dispatch(removeOfflineUser(id));
   });
   socket.on("new-message", (data) => {
-    store.dispatch(setNewMessage(data.message, data.sender));
+    const fullStore = store.getState();
+    const currentActiveConversation = fullStore.activeConversation;
+    store.dispatch(setNewMessageReceiver(data.message, data.from.username, currentActiveConversation));
   });
 });
 
