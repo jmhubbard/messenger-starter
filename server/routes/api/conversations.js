@@ -77,6 +77,8 @@ router.get("/", async (req, res, next) => {
       // NEED TO EVENTUALLY FILTER BY UNREAD MESSAGES
       convoJSON.messageCount = convoJSON.messages.filter(function(item){
         return item.senderId !== userId;
+      }).filter(function(item){
+        return item.readStatus === false;
       }).length;
 
 
