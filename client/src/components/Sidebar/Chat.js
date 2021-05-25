@@ -49,12 +49,9 @@ class Chat extends Component {
     const reqBody = {
       conversationId: conversationId,
     };
-    //Updates the all of the users unread messages to readStatus = true inside the database 
-    await this.props.updateMessageStatusDb(reqBody);
-    //Sets the conversation.messageCount to zero inside store
+
+  //Sets the conversation.messageCount to zero inside store
     await this.props.updateNotificationCount(reqBody);
-    //Sets all of the users unread messages to readStatus = true inside the store
-    await this.props.setMessagesToReadInStore(reqBody);
   };
 
   render() {
