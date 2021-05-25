@@ -6,6 +6,7 @@ import {
   addMessageToStore,
   resetConversationNotifications,
   addMessageToStoreReceiver,
+  setMessagesToReadInStore,
 } from "./utils/reducerFunctions";
 
 // ACTIONS
@@ -19,6 +20,7 @@ const CLEAR_SEARCHED_USERS = "CLEAR_SEARCHED_USERS";
 const ADD_CONVERSATION = "ADD_CONVERSATION";
 const RESET_NOTIFICATIONS = "RESET_NOTIFICATIONS";
 const SET_MESSAGE_RECEIVER = "SET_MESSAGE_RECEIVER";
+const SET_MESSAGES_TO_READ = "SET_MESSAGES_TO_READ"
 
 // ACTION CREATORS
 
@@ -45,6 +47,13 @@ export const setNewMessageReceiver = (
     type: SET_MESSAGE_RECEIVER,
     payload: { message, sender, currentActiveConversation },
   };
+};
+
+export const setMessageToRead = (conversationId) => {
+  return {
+    type: SET_MESSAGES_TO_READ,
+    payload: {conversationId},
+  }
 };
 
 export const addOnlineUser = (id) => {
@@ -122,6 +131,8 @@ const reducer = (state = [], action) => {
       );
     case RESET_NOTIFICATIONS:
       return resetConversationNotifications(state, action.payload);
+    case SET_MESSAGES_TO_READ:
+      return setMessagesToReadInStore(state, action.payload.conversationId);
     default:
       return state;
   }
