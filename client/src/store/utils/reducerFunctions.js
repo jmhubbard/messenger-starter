@@ -91,8 +91,6 @@ export const addNewConvoToStore = (state, recipientId, message) => {
 };
 
 export const resetConversationNotifications = (state, conversationId) => {
-  console.log("reset convo id");
-  console.log(conversationId);
   return state.map((convo) => {
     if (convo.id === conversationId && conversationId) {
       const newConvo = { ...convo };
