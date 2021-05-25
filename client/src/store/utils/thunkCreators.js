@@ -6,6 +6,7 @@ import {
   setNewMessage,
   setSearchedUsers,
   resetNotifications,
+  setMessageToRead,
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
 
@@ -83,12 +84,22 @@ const saveMessage = async (body) => {
   return data;
 };
 
-export const updateMessageStatus = (body) => async (dispatch) => {
+export const updateMessageStatusDb = (body) => async (dispatch) => {
   const convoId = body.conversationId;
 
   if(convoId) {
     try {
       await axios.put("/api/messages", body);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
+
+export const updateNotificationCount = (body) => async (dispatch) => {
+  const convoId = body.conversationId;
+  if(convoId) {
+    try {
       dispatch(resetNotifications(convoId));
     } catch (error) {
       console.error(error);
@@ -130,5 +141,16 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
     dispatch(setSearchedUsers(data));
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const setMessagesToReadInStore = (body) => async (dispatch) => {
+  const convoId = body.conversationId;
+  if(convoId) {
+    try {
+      dispatch(setMessageToRead(convoId));
+    } catch (error) {
+      console.error(error);
+    }
   }
 };
