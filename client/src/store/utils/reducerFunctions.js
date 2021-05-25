@@ -102,3 +102,19 @@ export const resetConversationNotifications = (state, conversationId) => {
       return convo;
     }
   });}
+
+  export const setMessagesToReadInStore = (state, conversationId) => {
+    return state.map((convo) => {
+      if (convo.id === conversationId) {
+        const convoCopy = { ...convo };
+        convoCopy.messages.forEach((message) => {
+          if (message.readStatus === false && convoCopy.otherUser.id === message.senderId) {
+            message.readStatus = true;
+          };
+        });
+        return convoCopy;
+      } else {
+        return convo;
+      }
+    }
+  )};
