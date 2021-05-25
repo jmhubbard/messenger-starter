@@ -21,7 +21,7 @@ export const addMessageToStoreReceiver = (state, message, sender, currentActiveC
       convoCopy.messages.push(message);
       convoCopy.latestMessageText = message.text;
       if (sender !== currentActiveConversation) {
-        convoCopy.messageCount ++;
+        convoCopy.notificationCount ++;
       };
 
 
@@ -94,7 +94,7 @@ export const resetConversationNotifications = (state, conversationId) => {
   return state.map((convo) => {
     if (convo.id === conversationId && conversationId) {
       const newConvo = { ...convo };
-      newConvo.messageCount = 0;
+      newConvo.notificationCount = 0;
       return newConvo;
     } else {
       return convo;

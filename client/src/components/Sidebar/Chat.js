@@ -50,7 +50,7 @@ class Chat extends Component {
       conversationId: conversationId,
     };
 
-  //Sets the conversation.messageCount to zero inside store
+  //Sets the conversation.notificationCount to zero inside store
     await this.props.updateNotificationCount(reqBody);
   };
 
