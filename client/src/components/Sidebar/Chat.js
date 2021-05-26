@@ -5,7 +5,6 @@ import { withStyles } from "@material-ui/core/styles";
 import { setActiveChat } from "../../store/activeConversation";
 import { connect } from "react-redux";
 import { updateMessageStatusDb, updateNotificationCount, setMessagesToReadInStore } from '../../store/utils/thunkCreators';
-import store from "../../store";
 
 const styles = {
   root: {
@@ -23,8 +22,7 @@ const styles = {
 
 class Chat extends Component {
   componentDidUpdate(){
-    const fullStore = store.getState();
-    const activeConversation = fullStore.activeConversation;
+    const activeConversation = this.props.activeConversation;
     const lastMessage = this.props.conversation.messages[this.props.conversation.messages.length - 1];
     const otherUser = this.props.conversation.otherUser.username;
     const otherUserId = this.props.conversation.otherUser.id;
