@@ -33,11 +33,6 @@ class Chat extends Component {
       const reqBody = {
         conversationId: this.props.conversation.id,
       };
-      //If the user is currently viewing a conversation that is recieving messages
-      //the messages status will be updated to readStatus = true inside the database
-      //and the message status will be updated to readStatus = true inside the store
-      //There is no need to change notification count because the notification count only increases if the user isn't viewing the chat.
-      // This is done when a message is added to the store from socket.io
       this.props.updateMessageStatusDb(reqBody);
       this.props.setMessagesToReadInStore(reqBody);
     }
