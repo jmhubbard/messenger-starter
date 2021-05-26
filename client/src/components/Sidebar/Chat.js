@@ -23,9 +23,9 @@ const styles = {
 class Chat extends Component {
   componentDidUpdate(){
     const activeConversation = this.props.activeConversation;
-    const lastMessage = this.props.conversation.messages[this.props.conversation.messages.length - 1];
-    const otherUser = this.props.conversation.otherUser.username;
-    const otherUserId = this.props.conversation.otherUser.id;
+    const { messages, otherUser: user } = this.props.conversation;
+    const { username: otherUser, id: otherUserId } = user;
+    const lastMessage = messages[messages.length - 1];
 
     if (activeConversation === otherUser && lastMessage.senderId === otherUserId && lastMessage.readStatus === false) {
       const reqBody = {
