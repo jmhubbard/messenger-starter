@@ -21,7 +21,7 @@ export const addMessageToStoreReceiver = (state, message, sender, currentActiveC
       convoCopy.messages.push(message);
       convoCopy.latestMessageText = message.text;
       if (sender !== currentActiveConversation) {
-        convoCopy.notificationCount ++;
+        convoCopy.notificationCount++;
       };
 
 
