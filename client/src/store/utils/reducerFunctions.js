@@ -14,6 +14,24 @@ export const addMessageToStore = (state, payload) => {
   });
 };
 
+export const addMessageToStoreReceiver = (state, message, sender, currentActiveConversation) => {
+  return state.map((convo) => {
+    if (convo.id === message.conversationId) {
+      const convoCopy = { ...convo };
+      convoCopy.messages.push(message);
+      convoCopy.latestMessageText = message.text;
+      if (sender !== currentActiveConversation) {
+        convoCopy.notificationCount++;
+      };
+
+
+      return convoCopy;
+    } else {
+      return convo;
+    }
+  });
+};
+
 export const addOnlineUserToStore = (state, id) => {
   return state.map((convo) => {
     if (convo.otherUser.id === id) {
@@ -71,3 +89,30 @@ export const addNewConvoToStore = (state, recipientId, message) => {
     }
   });
 };
+
+export const resetConversationNotifications = (state, conversationId) => {
+  return state.map((convo) => {
+    if (convo.id === conversationId && conversationId) {
+      const newConvo = { ...convo };
+      newConvo.notificationCount = 0;
+      return newConvo;
+    } else {
+      return convo;
+    }
+  });}
+
+  export const setMessagesToReadInStore = (state, conversationId) => {
+    return state.map((convo) => {
+      if (convo.id === conversationId) {
+        const convoCopy = { ...convo };
+        convoCopy.messages.forEach((message) => {
+          if (message.readStatus === false && convoCopy.otherUser.id === message.senderId) {
+            message.readStatus = true;
+          };
+        });
+        return convoCopy;
+      } else {
+        return convo;
+      }
+    }
+  )};

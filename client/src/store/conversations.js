@@ -4,6 +4,9 @@ import {
   addSearchedUsersToStore,
   removeOfflineUserFromStore,
   addMessageToStore,
+  resetConversationNotifications,
+  addMessageToStoreReceiver,
+  setMessagesToReadInStore,
 } from "./utils/reducerFunctions";
 
 // ACTIONS
@@ -15,6 +18,9 @@ const REMOVE_OFFLINE_USER = "REMOVE_OFFLINE_USER";
 const SET_SEARCHED_USERS = "SET_SEARCHED_USERS";
 const CLEAR_SEARCHED_USERS = "CLEAR_SEARCHED_USERS";
 const ADD_CONVERSATION = "ADD_CONVERSATION";
+const RESET_NOTIFICATIONS = "RESET_NOTIFICATIONS";
+const SET_MESSAGE_RECEIVER = "SET_MESSAGE_RECEIVER";
+const SET_MESSAGES_TO_READ = "SET_MESSAGES_TO_READ"
 
 // ACTION CREATORS
 
@@ -30,6 +36,24 @@ export const setNewMessage = (message) => {
     type: SET_MESSAGE,
     payload: { message },
   };
+};
+
+export const setNewMessageReceiver = (
+  message,
+  sender,
+  currentActiveConversation
+) => {
+  return {
+    type: SET_MESSAGE_RECEIVER,
+    payload: { message, sender, currentActiveConversation },
+  };
+};
+
+export const setMessageToRead = (conversationId) => {
+  return {
+    type: SET_MESSAGES_TO_READ,
+    payload: {conversationId},
+  }
 };
 
 export const addOnlineUser = (id) => {
@@ -67,6 +91,13 @@ export const addConversation = (recipientId, newMessage) => {
   };
 };
 
+export const resetNotifications = (conversationId) => {
+  return {
+    type: RESET_NOTIFICATIONS,
+    payload: conversationId,
+  };
+};
+
 // REDUCER
 
 const reducer = (state = [], action) => {
@@ -75,6 +106,14 @@ const reducer = (state = [], action) => {
       return action.conversations;
     case SET_MESSAGE:
       return addMessageToStore(state, action.payload);
+    case SET_MESSAGE_RECEIVER:
+      const { message, sender, currentActiveConversation } = action.payload;
+      return addMessageToStoreReceiver(
+        state,
+        message,
+        sender,
+        currentActiveConversation
+      );
     case ADD_ONLINE_USER: {
       return addOnlineUserToStore(state, action.id);
     }
@@ -91,6 +130,10 @@ const reducer = (state = [], action) => {
         action.payload.recipientId,
         action.payload.newMessage
       );
+    case RESET_NOTIFICATIONS:
+      return resetConversationNotifications(state, action.payload);
+    case SET_MESSAGES_TO_READ:
+      return setMessagesToReadInStore(state, action.payload.conversationId);
     default:
       return state;
   }

@@ -50,6 +50,11 @@ const ChatContent = (props) => {
           {latestMessageText}
         </Typography>
       </Box>
+      {conversation.notificationCount > 0 && (
+        <Typography className={classes.notification}>
+          {conversation.notificationCount}
+        </Typography>
+      )}
     </Box>
   );
 };
