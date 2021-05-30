@@ -22,15 +22,10 @@ class Home extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.user.id !== prevProps.user.id) {
-      this.setState({
-        isLoggedIn: true,
-      });
-    }
-  }
-
   componentDidMount() {
+    this.setState({
+      isLoggedIn: true,
+    });
     this.props.fetchConversations();
   }
 
