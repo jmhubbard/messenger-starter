@@ -29,16 +29,13 @@ export const fetchUser = () => async (dispatch) => {
     }
   } catch (error) {
     console.error(error);
-  } 
+  }
 };
 
 export const register = (credentials) => async (dispatch) => {
   try {
     const { data } = await axios.post("/auth/register", credentials);
     dispatch(gotUser(data));
-    const userId = data.id;
-    socket.auth = { userId };
-    socket.connect();
   } catch (error) {
     console.error(error);
     dispatch(gotUser({ error: error.response.data.error || "Server Error" }));
@@ -49,9 +46,6 @@ export const login = (credentials) => async (dispatch) => {
   try {
     const { data } = await axios.post("/auth/login", credentials);
     dispatch(gotUser(data));
-    const userId = data.id;
-    socket.auth = { userId };
-    socket.connect();
   } catch (error) {
     console.error(error);
     dispatch(gotUser({ error: error.response.data.error || "Server Error" }));
@@ -87,7 +81,7 @@ const saveMessage = async (body) => {
 export const updateMessageStatusDb = (body) => async (dispatch) => {
   const convoId = body.conversationId;
 
-  if(convoId) {
+  if (convoId) {
     try {
       await axios.put("/api/messages", body);
     } catch (error) {
@@ -98,7 +92,7 @@ export const updateMessageStatusDb = (body) => async (dispatch) => {
 
 export const updateNotificationCount = (body) => async (dispatch) => {
   const convoId = body.conversationId;
-  if(convoId) {
+  if (convoId) {
     try {
       dispatch(resetNotifications(convoId));
     } catch (error) {
@@ -121,14 +115,12 @@ export const postMessage = (body) => async (dispatch) => {
   try {
     const data = await saveMessage(body);
 
-
     if (!body.conversationId) {
       dispatch(addConversation(body.recipientId, data.message));
     } else {
       dispatch(setNewMessage(data.message));
     }
 
- 
     sendMessage(data, body);
   } catch (error) {
     console.error(error);
@@ -146,7 +138,7 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
 
 export const setMessagesToReadInStore = (body) => async (dispatch) => {
   const convoId = body.conversationId;
-  if(convoId) {
+  if (convoId) {
     try {
       dispatch(setMessageToRead(convoId));
     } catch (error) {

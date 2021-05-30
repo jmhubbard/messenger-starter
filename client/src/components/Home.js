@@ -7,6 +7,7 @@ import { SidebarContainer } from "./Sidebar";
 import { ActiveChat } from "./ActiveChat";
 import { logout, fetchConversations } from "../store/utils/thunkCreators";
 import { clearOnLogout } from "../store/index";
+import socket from "../socket";
 
 const styles = {
   root: {
@@ -26,7 +27,12 @@ class Home extends Component {
     this.setState({
       isLoggedIn: true,
     });
-    this.props.fetchConversations();
+    if (this.props.user.id) {
+      const userId = this.props.user.id;
+      socket.auth = { userId };
+      socket.connect();
+      this.props.fetchConversations();
+    }
   }
 
   handleLogout = async () => {
