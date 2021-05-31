@@ -4,7 +4,11 @@ import { BadgeAvatar, ChatContent } from "../Sidebar";
 import { withStyles } from "@material-ui/core/styles";
 import { setActiveChat } from "../../store/activeConversation";
 import { connect } from "react-redux";
-import { updateMessageStatusDb, updateNotificationCount, setMessagesToReadInStore } from '../../store/utils/thunkCreators';
+import {
+  updateMessageStatusDb,
+  updateNotificationCount,
+  setMessagesToReadInStore,
+} from "../../store/utils/thunkCreators";
 
 const styles = {
   root: {
@@ -21,20 +25,25 @@ const styles = {
 };
 
 class Chat extends Component {
-  componentDidUpdate(){
+  componentDidUpdate() {
     const activeConversation = this.props.activeConversation;
     const { messages, otherUser: user } = this.props.conversation;
     const { username: otherUser, id: otherUserId } = user;
     const lastMessage = messages[messages.length - 1];
 
-    if (activeConversation === otherUser && lastMessage.senderId === otherUserId && lastMessage.readStatus === false) {
+    if (
+      lastMessage &&
+      activeConversation === otherUser &&
+      lastMessage.senderId === otherUserId &&
+      lastMessage.readStatus === false
+    ) {
       const reqBody = {
         conversationId: this.props.conversation.id,
       };
       this.props.updateMessageStatusDb(reqBody);
       this.props.setMessagesToReadInStore(reqBody);
     }
-}
+  }
 
   handleClick = async (conversation) => {
     await this.props.setActiveChat(conversation.otherUser.username);
@@ -43,7 +52,7 @@ class Chat extends Component {
       conversationId: conversationId,
     };
 
-  //Sets the conversation.notificationCount to zero inside store
+    //Sets the conversation.notificationCount to zero inside store
     await this.props.updateNotificationCount(reqBody);
   };
 
@@ -80,7 +89,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     setMessagesToReadInStore: (conversationId) => {
       dispatch(setMessagesToReadInStore(conversationId));
-    }
+    },
   };
 };
 
